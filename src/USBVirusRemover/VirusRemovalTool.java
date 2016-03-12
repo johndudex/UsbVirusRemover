@@ -34,6 +34,7 @@ public class VirusRemovalTool extends JFrame {
 	DefaultTableModel model = new DefaultTableModel();
 	private JTextField DriveLetter;
 	static VirusRemovalTool Frm=new VirusRemovalTool();
+	boolean tableToggle=true;
 
 	/**
 	 * Launch the application.
@@ -62,6 +63,7 @@ public class VirusRemovalTool extends JFrame {
 					VirusRemovalTool frame = new VirusRemovalTool();
 					frame.setVisible(true);
 					Frm=frame;
+					frame.setResizable(false);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -151,12 +153,16 @@ public class VirusRemovalTool extends JFrame {
 					JOptionPane.showMessageDialog(Frm, "No Drive Selected!!!");
 					return;}
 				String attr="attrib -h -r -s /s /d "+DriveLetter.getText()+"*.*";
-				System.out.println(attr);
+				
 				java.lang.Runtime rt = java.lang.Runtime.getRuntime();
 		    	try {
+		    		
 					java.lang.Process p = rt.exec(attr);
 					JOptionPane.showMessageDialog(Frm, "Congratulations Yours Files have been Restored \n \n \n  \t Developed by Johndudex");
-					 p = rt.exec("Explorer.exe "+DriveLetter.getText());
+					//p = rt.exec(DriveLetter.getText());
+					//p = rt.exec("Del *.Ink");
+					System.out.println("del "+DriveLetter.getText()+"*.Inf");
+					p = rt.exec("Explorer.exe "+DriveLetter.getText());
 				} catch (IOException e) {
 					
 				}
@@ -212,8 +218,11 @@ public class VirusRemovalTool extends JFrame {
 					// TODO Auto-generated method stub
 					try{
 					int selectedRow = table.getSelectedRow();
+					
 					DriveLetter.setText(table.getValueAt(selectedRow, 0).toString());
+					
 					}catch(ArrayIndexOutOfBoundsException e){}
+					
 				}
 			});
 		  
